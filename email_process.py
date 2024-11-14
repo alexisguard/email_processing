@@ -707,12 +707,16 @@ def main():
     setup_logging()
 
     try:
-        source_folder = Path("mails")  # Chemin mis à jour pour macOS
+        source_folder = Path("/mails")  # Chemin mis à jour pour macOS
         output_dir = Path("EXTRACTED_EMAILS")
+
+        output_dir.mkdir(exist_ok=True, parents=True)
+        logging.info(f"Dossier de sortie créé/vérifié : {output_dir}")
 
         if not source_folder.exists():
             logging.error(f"Dossier source {source_folder} inexistant")
             return
+		
 
         # Nettoyer le dossier de sortie avant le traitement
         PathHandler.ensure_directory(output_dir)
